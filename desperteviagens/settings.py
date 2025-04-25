@@ -48,6 +48,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'desperteviagens.urls'
@@ -138,5 +139,6 @@ EMAIL_HOST_PASSWORD = 'zzth zcpc usza gkav'         # ← Senha de app (não a s
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
+# WhiteNoise configuração
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
