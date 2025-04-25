@@ -1,0 +1,98 @@
+{% load static %}
+<style>
+  .contato-link {
+    transition: color 0.3s;
+  }
+
+  .contato-link:hover {
+    color: #198754 !important; /* verde Bootstrap */
+  }
+  .social-icon {
+    transition: transform 0.3s ease;
+  }
+
+  .social-icon:hover {
+    transform: scale(1.2);
+  }
+</style>
+<!-- Font Awesome -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+<footer class="bg-dark text-light py-4 mt-5">
+  <div class="container">
+    <div class="row text-center text-md-start">
+
+      <!-- Contato -->
+
+<div class="col-md-4 mb-4">
+  <h5 class="fw-bold">Desperte Viagens</h5>
+
+  <div class="d-flex align-items-center mb-2">
+    <span class="me-2 fs-5">📞</span>
+    <a href="tel:+5551997452112" class="text-light text-decoration-none contato-link">51 99951-7543</a>
+  </div>
+
+  <div class="d-flex align-items-center mb-2">
+    <span class="me-2 fs-5">📧</span>
+    <a href="mailto:desperte@desperteviagens.com.br" class="text-light text-decoration-none contato-link">contato@desperteviagens.com</a>
+  </div>
+
+  <div class="d-flex align-items-center">
+    <span class="me-2 fs-5">💬</span>
+    <a href="https://wa.me/5551997452112" target="_blank" class="text-light text-decoration-none contato-link">Chamar no WhatsApp</a>
+  </div>
+</div>
+
+
+
+
+      <!-- Links -->
+      <div class="col-md-4 mb-4">
+        <h5 class="fw-bold">Links rápidos</h5>
+        <ul class="list-unstyled">
+          <li><a href="{% url 'home' %}" class="text-light text-decoration-none contato-link">🏠 Início</a></li>
+          <li><a href="{% url 'cotacao' %}" class="text-light text-decoration-none contato-link">🧾 Cotação</a></li>
+          <li><a href="{% url 'depoimentos' %}" class="text-light text-decoration-none contato-link">💬 Depoimentos</a></li>
+          <li><a href="{% url 'contato' %}" class="text-light text-decoration-none contato-link">📞 Contato</a></li>
+        </ul>
+      </div>
+
+<!-- Redes sociais -->
+<div class="col-md-4 mb-4 text-center">
+  <h5 class="fw-bold mb-3">Siga-nos</h5>
+
+  <div class="d-flex justify-content-center gap-3">
+
+    <!-- Facebook -->
+    <a href="https://www.facebook.com/desperteviagens/" target="_blank"
+      class="btn rounded-circle text-white social-icon"
+      style="background-color: #1877F2; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+      <i class="fab fa-facebook-f"></i>
+    </a>
+
+    <!-- Instagram -->
+    <a href="https://www.instagram.com/desperteviagens/" target="_blank"
+      class="btn rounded-circle text-white social-icon"
+      style="background-color: #E1306C; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+      <i class="fab fa-instagram"></i>
+    </a>
+
+    <!-- WhatsApp -->
+    <a href="https://wa.me/5551997452112" target="_blank"
+      class="btn rounded-circle text-white social-icon"
+      style="background-color: #25D366; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+      <i class="fab fa-whatsapp"></i>
+    </a>
+
+  </div>
+</div>
+
+
+
+    </div>
+
+    <div class="text-center mt-3 small">
+        &copy; {% now "Y" %} Desperte Viagens. Todos os direitos reservados.
+    </div>
+  </div>
+</footer>

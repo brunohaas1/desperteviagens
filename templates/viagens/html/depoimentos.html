@@ -1,0 +1,43 @@
+{% load static %}
+{% include "viagens/html/menu.html" %}
+
+<!-- AOS CSS -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+<div class="container py-5">
+  <h2 class="text-center text-primary mb-5" data-aos="fade-down">O que dizem nossos viajantes</h2>
+
+  <div class="row g-4">
+    <!-- Depoimento 1 -->
+    <div class="col-md-6" data-aos="fade-right">
+      <div class="card shadow h-100">
+        <div class="card-body">
+          <p class="card-text">
+            Foi tudo incrível. Muito bom viajar com vocês. Agradeço pela organização, pelo acompanhamento e por nos deixar sempre tranquilos desde o planejamento até o retorno.
+          </p>
+          <h5 class="card-title text-end mt-3"><em>– Paulo Jardel Andres</em></h5>
+        </div>
+      </div>
+    </div>
+
+    <!-- Depoimento 2 -->
+    <div class="col-md-6" data-aos="fade-left">
+      <div class="card shadow h-100">
+        <div class="card-body">
+          <p class="card-text">
+            Obrigada pela dedicação, compromisso e responsabilidade. Ótimas profissionais! Adoramos viajar com vocês.
+          </p>
+          <h5 class="card-title text-end mt-3"><em>– Silvia</em></h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AOS Script -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init();
+</script>
+
+{% include "viagens/html/rodape.html" %}

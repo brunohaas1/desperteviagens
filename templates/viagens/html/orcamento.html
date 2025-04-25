@@ -1,0 +1,20 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Solicitar Orçamento</title>
+  <link rel="stylesheet" href="{% static 'css/estilo.css' %}">
+</head>
+<body>
+  <div class="container">
+    <h2>Solicitar Orçamento</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="botao">Enviar</button>
+    </form>
+    <a href="{% url 'home' %}">← Voltar</a>
+  </div>
+</body>
+</html>

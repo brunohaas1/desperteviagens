@@ -1,0 +1,72 @@
+{% load static %}
+{% include "viagens/html/menu.html" %}
+<style>
+  .contato-link {
+    transition: color 0.3s;
+  }
+
+  .contato-link:hover {
+    color: #198754 !important; /* verde Bootstrap */
+  }
+</style>
+
+<!-- AOS CSS -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+<div class="container py-5">
+  <h2 class="text-center text-primary mb-5" data-aos="fade-down">Fale com a Desperte</h2>
+
+  <div class="row g-5">
+    <!-- Informações de Contato -->
+    <div class="col-md-6" data-aos="fade-right">
+      <div class="bg-light p-4 rounded shadow">
+        <h5 class="fw-bold mb-3">Entre em Contato</h5>
+    
+        <div class="d-flex align-items-center mb-3">
+          <span class="fs-5 me-2">📍</span>
+          <p class="mb-0">Rua Exemplo, 123 -  Cidade/RS</p>
+        </div>
+    
+        <div class="d-flex align-items-center mb-3">
+          <span class="fs-5 me-2">📞</span>
+          <p class="mb-0">
+            <a href="tel:+5551999517543" class="text-decoration-none text-dark">51 99951-7543</a>
+          </p>
+        </div>
+    
+        <div class="d-flex align-items-center mb-3">
+          <span class="fs-5 me-2">📧</span>
+          <p class="mb-0">
+            <a href="mailto:desperteviagens@gmail.com" class="text-decoration-none text-dark contato-link">contato@desperteviagens.com</a>
+          </p>
+        </div>
+    
+        <div class="d-flex align-items-center">
+          <span class="fs-5 me-2">💬</span>
+          <p class="mb-0">
+            <a href="https://wa.me/5551999517543" target="_blank" class="text-decoration-none text-dark contato-link">Chamar no WhatsApp</a>
+          </p>
+        </div>
+    
+      </div>
+    </div>
+    
+
+    <!-- Mapa -->
+    <div class="col-md-6" data-aos="fade-left">
+      <div class="ratio ratio-4x3 shadow rounded">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3456.9432208040664!2d-51.2307!3d-29.1631!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0000000000000000!2sDesperte%20Viagens!5e0!3m2!1spt-BR!2sbr!4v0000000000000"
+          width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AOS Script -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init();
+</script>
+
+{% include "viagens/html/rodape.html" %}
