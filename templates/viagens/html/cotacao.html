@@ -1,6 +1,22 @@
 {% load static %}
 {% load form_filters %}
 {% include "viagens/html/menu.html" %}
+<style>
+  .awesomplete {
+    display: block;
+    width: 100%;
+  }
+  .awesomplete mark {
+    background: transparent !important;
+    color: inherit !important;
+    font-weight: normal !important;
+    text-decoration: none !important;
+  }
+  .awesomplete input {
+    width: 100% !important;
+    box-sizing: border-box; /* muito importante para somar padding e borda direito */
+  }
+</style>
 
 <!-- AOS CSS -->
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -36,9 +52,14 @@
             </div>
           
             <div class="mb-3">
-              <label for="id_destino" class="form-label">Destino</label>
-              {{ form.destino|add_class:"form-control" }}
+              <label for="id_destino" class="form-label">Destino</label><br>
+              <input list="destinos" name="destino" id="id_destino" class="form-control" placeholder="Digite ou escolha um destino" autocomplete="off">
+              {% include "viagens/html/destinos_list.html" %}
             </div>
+            
+            
+                       
+            
           
             <div class="mb-3">
               <label for="id_data_viagem" class="form-label">Data da Viagem</label>
@@ -76,6 +97,30 @@ $(document).ready(function(){
   $('#id_telefone').mask('(00) 00000-0000');
 });
 </script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.5/awesomplete.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.5/awesomplete.min.js"></script>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var input = document.getElementById("id_destino");
+    var datalist = document.getElementById("destinos");
+    var options = datalist.getElementsByTagName('option');
+  
+    var destinos = [];
+    for (var i = 0; i < options.length; i++) {
+      destinos.push(options[i].value);
+    }
+  
+    new Awesomplete(input, {
+      list: destinos,
+      minChars: 1,
+      maxItems: 10,
+      autoFirst: true
+    });
+  });
+  </script>
+
 
 
 
