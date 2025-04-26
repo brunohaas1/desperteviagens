@@ -15,8 +15,12 @@ class SolicitacaoOrcamentoForm(forms.ModelForm):
 }),
 
             
-            'data_viagem': forms.DateInput(attrs={
-                'type': 'date',
+            'data_viagem': forms.TextInput(attrs={
                 'class': 'form-control',
-            }),
+                'id': 'id_data_viagem',
+                'autocomplete': 'off',
+                'placeholder': 'Selecione a data'
+}),
+
+
 }

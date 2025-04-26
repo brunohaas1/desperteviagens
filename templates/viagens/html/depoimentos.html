@@ -1,9 +1,10 @@
 {% load static %}
 {% include "viagens/html/menu.html" %}
 
-<!-- AOS CSS -->
-<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<!-- Estilos -->
+<link rel="stylesheet" href="{% static 'vendor/aos/aos.css' %}">
 
+<!-- Conteúdo -->
 <div class="container py-5">
   <h2 class="text-center text-primary mb-5" data-aos="fade-down">O que dizem nossos viajantes</h2>
 
@@ -34,8 +35,8 @@
   </div>
 </div>
 
-<!-- AOS Script -->
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<!-- Scripts -->
+<script src="{% static 'vendor/aos/aos.js' %}"></script>
 <script>
   AOS.init();
 </script>
