@@ -1,5 +1,5 @@
 from django import forms
-from .models import SolicitacaoOrcamento
+from .models import SolicitacaoOrcamento , DocumentoViagem
 
 class SolicitacaoOrcamentoForm(forms.ModelForm):
     class Meta:
@@ -24,3 +24,7 @@ class SolicitacaoOrcamentoForm(forms.ModelForm):
 
 
 }
+class DocumentoViagemForm(forms.ModelForm):
+    class Meta:
+        model = DocumentoViagem
+        fields = ('arquivo',)

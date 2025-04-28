@@ -1,0 +1,33 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block content %}
+<h1>Relatório de Viagens por Status</h1>
+
+<canvas id="viagensChart" width="400" height="200"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('viagensChart').getContext('2d');
+    const viagensChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: {{ labels|safe }},
+            datasets: [{
+                label: 'Viagens por Status',
+                data: {{ data|safe }},
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                },
+            }
+        }
+    });
+</script>
+
+{% endblock %}
