@@ -1,0 +1,10 @@
+body.login {
+    background: linear-gradient(120deg, #89f7fe, #66a6ff);
+    color: #333;
+}
+
+.login #content {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+}
