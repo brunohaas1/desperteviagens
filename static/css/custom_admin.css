@@ -8,3 +8,50 @@ body.login {
     padding: 30px;
     border-radius: 10px;
 }
+/* Muda o fundo geral */
+body {
+    background: #f4f6f8;
+}
+
+/* Deixa o container central branco e bonito */
+#content {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Personaliza o cabeçalho */
+#header {
+    background-color: #3b82f6; /* azul bonito */
+    border-bottom: 2px solid #2563eb;
+}
+
+/* Botões principais */
+.button, input[type="submit"], input[type="button"], .submit-row input {
+    background-color: #2563eb;
+    border-color: #2563eb;
+    color: white;
+    font-weight: bold;
+}
+
+.button:hover, input[type="submit"]:hover, input[type="button"]:hover {
+    background-color: #1e40af;
+    border-color: #1e40af;
+}
+
+/* Ajusta o título principal */
+#content h1 {
+    font-size: 28px;
+    color: #333;
+}
+
+/* Links do menu lateral */
+#nav-sidebar a {
+    color: #374151;
+    font-weight: 500;
+}
+
+#nav-sidebar a:hover {
+    color: #1e3a8a;
+}

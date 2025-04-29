@@ -1,0 +1,16 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block content %}
+  <div style="text-align: center;">
+    <img src="{% static 'images/logo.png' %}" alt="Logo" style="height: 80px; margin-bottom: 10px;">
+    <h1>Bem-vindo ao sistema de gestão da <strong>Desperte Viagens</strong></h1>
+    <p style="color: #555;">Use o menu ao lado para gerenciar clientes, viagens e documentos.</p>
+  </div>
+
+  <div style="margin-top: 30px;">
+    {% if app_list %}
+      {{ block.super }}
+    {% endif %}
+  </div>
+{% endblock %}
