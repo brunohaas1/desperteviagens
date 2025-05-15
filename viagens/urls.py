@@ -1,6 +1,8 @@
 from django.urls import path
 from . import views
 from .admin_reports import relatorio_viagens
+from django.contrib.sitemaps.views import sitemap
+
 
 urlpatterns = [
     path('', views.home, name='home'),
