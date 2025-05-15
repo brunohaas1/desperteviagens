@@ -10,4 +10,7 @@ urlpatterns = [
     path('orcamento/sucesso/', views.orcamento_sucesso, name='orcamento_sucesso'),
     path('contato/', views.contato, name='contato'),
     path('relatorios/viagens/', relatorio_viagens, name='relatorio_viagens'),
+    path('sobre-nos/', views.sobre_nos, name='sobre_nos'),
+    path('nossos-agentes/', views.nossos_agentes, name='nossos_agentes'),
+
 ]

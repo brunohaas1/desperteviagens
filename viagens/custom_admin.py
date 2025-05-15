@@ -4,6 +4,23 @@ from django.utils.translation import gettext_lazy as _
 from .models import Viagem, Cliente, DocumentoViagem
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
+from django.urls import reverse
+from django.shortcuts import redirect
+from urllib.parse import quote
+
+
+class DocumentoViagemAdmin(admin.ModelAdmin):
+    def response_add(self, request, obj, post_url_continue=None):
+        next_url = request.GET.get("next")
+        if next_url:
+            return redirect(next_url)
+        return super().response_add(request, obj, post_url_continue)
+
+    def response_delete(self, request, obj_display, obj_id):
+        next_url = request.GET.get("next")
+        if next_url:
+            return redirect(next_url)
+        return super().response_delete(request, obj_display, obj_id)
 
 class ViagensAdminSite(AdminSite):
     site_header = "Painel de Viagens"
@@ -38,11 +55,15 @@ class ViagemInline(admin.TabularInline):
             documentos = obj.documentos_viagem.all()
             links = []
 
+            # URL para voltar após adicionar/excluir
+            referer_url = quote(f"/painel-viagens/viagens/cliente/{obj.cliente.id}/change/")
+
             for documento in documentos:
                 url = documento.arquivo.url
                 nome = documento.arquivo.name.split('/')[-1]
-                tamanho_kb = documento.arquivo.size // 1024  # Tamanho em KB
-                deletar_url = f"/admin/viagens/documentoviagem/{documento.id}/delete/"
+                tamanho_kb = documento.arquivo.size // 1024
+                deletar_url = reverse("viagens_admin:viagens_documentoviagem_delete", args=[documento.id])
+                deletar_url += f"?next={referer_url}"
 
                 link_html = f"""
                     📎 <a href="{url}" target="_blank">{nome}</a> ({tamanho_kb} KB)
@@ -50,11 +71,12 @@ class ViagemInline(admin.TabularInline):
                 """
                 links.append(link_html)
 
-            add_url = f"/admin/viagens/documentoviagem/add/?viagem={obj.id}"
+            add_url = reverse("viagens_admin:viagens_documentoviagem_add") + f"?viagem={obj.id}&next={referer_url}"
             links.append(f'<a class="button" href="{add_url}" target="_blank" style="margin-top:10px;">➕ Anexar Documento</a>')
 
             return mark_safe('<br><br>'.join(links))
         return "-"
+    
     documentos_list.short_description = "Documentos"
 
 # Admin personalizado para Cliente
@@ -73,4 +95,5 @@ class ViagemAdminCustomizado(admin.ModelAdmin):
 
 # Registro dos dois no painel novo
 custom_admin_site.register(Cliente, ClienteAdminCustomizado)
-custom_admin_site.register(Viagem, ViagemAdminCustomizado)
+#custom_admin_site.register(Viagem, ViagemAdminCustomizado)
+custom_admin_site.register(DocumentoViagem, DocumentoViagemAdmin)

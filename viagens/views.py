@@ -44,3 +44,8 @@ def orcamento_sucesso(request):
     return render(request, 'viagens/html/orcamento_sucesso.html')
 def contato(request):
     return render(request, 'viagens/html/contato.html')
+def sobre_nos(request):
+    return render(request, 'viagens/html/sobre_nos.html')
+
+def nossos_agentes(request):
+    return render(request, 'viagens/html/nossos_agentes.html')

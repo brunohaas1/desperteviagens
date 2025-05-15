@@ -19,12 +19,12 @@
 
   <style>
     .navbar {
-      background-color: rgba(13, 110, 253, 1); /* azul Bootstrap, mas semi-transparente */
+      background-color: rgb(255, 159, 5); /*  Bootstrap, mas semi-transparente */
       transition: background-color 0.5s ease, box-shadow 0.5s ease;
     }
   
     .navbar.scrolled {
-      background-color: rgba(13, 110, 253, 2) !important; /* azul sólido */
+      background-color: rgb(255, 159, 5, 2) !important; /* azul sólido */
       box-shadow: 0 2px 10px rgba(0,0,0,0.3);
     }
   
@@ -66,6 +66,12 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{% url 'contato' %}"><i class="fas fa-phone-alt me-1"></i> Contato</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'sobre_nos' %}"><i class="fas fa-users me-1"></i> Sobre Nós</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'nossos_agentes' %}"><i class="fas fa-user-tie me-1"></i> Nossos Agentes</a>
         </li>
       </ul>
     </div>
