@@ -49,3 +49,5 @@ def sobre_nos(request):
 
 def nossos_agentes(request):
     return render(request, 'viagens/html/nossos_agentes.html')
+def produtos(request):
+    return render(request, 'viagens/html/produtos.html')
