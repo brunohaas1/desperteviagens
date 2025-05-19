@@ -1,1 +1,46 @@
+# Ignora ambientes virtuais
 venv/
+.env/
+*.env
+
+# Ignora arquivos gerados pelo Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Ignora arquivos de log
+*.log
+
+# Ignora o banco de dados SQLite (se usado)
+db.sqlite3
+*.sqlite3
+
+# Ignora arquivos do sistema operacional
+.DS_Store
+Thumbs.db
+
+# Ignora IDEs e editores
+.vscode/
+.idea/
+
+# Ignora pasta gerada pelo Django collectstatic
+/staticfiles/
+
+# Ignora migrations (opcional — só se você não quiser versionar)
+# **Comente essa parte se você controla as migrations no Git**
+# **Descomente se você quiser deixar só local**
+# */migrations/
+# !*/migrations/__init__.py
+
+# Ignora arquivos temporários
+*.bak
+*.swp
+
+# Ignora arquivos de build/compilação
+*.egg-info/
+build/
+dist/
+
+# Ignora arquivos de testes temporários
+.coverage
+htmlcov/
