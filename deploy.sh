@@ -22,7 +22,7 @@ python manage.py collectstatic --noinput
 
 # 6. Reiniciar Gunicorn (ajuste o nome se for outro serviço)
 echo "🔄 Reiniciando Gunicorn..."
-sudo systemctl restart gunicorn
+sudo systemctl restart desperteviagens
 
 # 7. Reiniciar Nginx
 echo "🔄 Reiniciando Nginx..."
