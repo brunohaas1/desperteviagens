@@ -26,7 +26,7 @@ Telefone: {orcamento.telefone}
 Destino: {orcamento.destino}
 Data da viagem: {orcamento.data_viagem.strftime('%d/%m/%Y')}
             """
-            destinatarios = ['contato@desperteviagens.com.br']  # Pode ser mais de um
+            destinatarios = ['desperteviagens@gmail.com']  # Pode ser mais de um
 
             send_mail(assunto, mensagem, None, destinatarios)
 
