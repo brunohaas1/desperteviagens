@@ -12,6 +12,19 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 import os
 from pathlib import Path
 
+IS_LOCAL = os.environ.get('ENV') == 'LOCAL'
+DEBUG = IS_LOCAL
+
+if DEBUG:
+    ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+    IFRAME_URL = "http://localhost:3000"
+else:
+    ALLOWED_HOSTS = ['desperteviagens.com.br', 'www.desperteviagens.com.br']
+    IFRAME_URL = "https://desperteviagens.com.br/widget"
+
+print("DEBUG =", DEBUG)
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,12 +33,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-x9_uy&311ma=&1ay6+!a#4im9b!l^yc4562lmsu-7)2v15mcfv'
+SECRET_KEY = 'QR4Kdc8KD$r5UD<w$*.m!;=,}L/imA9l]6+V8G^]fj60w%-]7pt!gsZy<#^lE'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
-ALLOWED_HOSTS = ['desperteviagens.com.br', 'www.desperteviagens.com.br']
 
 
 # Application definition
