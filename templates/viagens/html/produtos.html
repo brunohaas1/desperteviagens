@@ -1,70 +1,44 @@
+{% extends "viagens/html/base.html" %}
 {% load static %}
-{% include 'viagens/html/menu.html' %}
 
-  <main style="padding: 40px 20px;">
-    <h1 style="text-align:center; margin-bottom: 30px;">Nossos Produtos</h1>
+{% block title %}Produtos - Desperte Viagens{% endblock %}
 
-    <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+{% block content %}
+<main style="padding: 40px 20px;">
+  <h1 class="text-center mb-5 text-primary">Nossos Produtos</h1>
 
-      <!-- Card 1 -->
-      <div style="width: 400px; border: 1px solid #ccc; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
-        <img src="{% static 'images/pacote1.jpg' %}" alt="Pacote 1" style="width: 100%; height: 350px; object-fit: cover;">
-        <div style="padding: 15px;">
-        <div style="text-align: center;">
-            <h2 style="font-size: 1.2em;">Voos Nacionais e internacionais</h2>
-          <p>Passagens com preços exclusivos</p>
-            <br> <br> <br>
-          <a href="{% url 'cotacao' %}" style="color: white; background: #198754; padding: 8px 12px; text-decoration: none; border-radius: 4px; display: inline-block; margin-top: 10px; center">Solicitar orçamento</a>
-        </div>
-        </div>
+  <div class="d-flex flex-wrap gap-4 justify-content-center">
+
+    <!-- Card 1 -->
+    <div class="card shadow" style="width: 400px;">
+      <img src="{% static 'images/pacote1.jpg' %}" class="card-img-top" alt="Pacote 1" style="height: 350px; object-fit: cover;">
+      <div class="card-body text-center">
+        <h2 class="card-title">Voos Nacionais e Internacionais</h2>
+        <p class="card-text">Passagens com preços exclusivos</p>
+        <a href="{% url 'cotacao' %}" class="btn btn-success mt-3">Solicitar orçamento</a>
       </div>
-
-      <!-- Card 2 -->
-      <div style="width: 400px; border: 1px solid #ccc; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
-        <img src="{% static 'images/pacote2.jpg' %}" alt="Pacote 2" style="width: 100%; height: 350px; object-fit: cover;">
-        <div style="padding: 15px;">
-        <div style="text-align: center;">     
-          <h2 style="font-size: 1.2em;">Pacotes de viagem nacionais e internacionais</h2>
-          <p>Passagens aéreas, hotéis , seguro viagem ,  translados e muito mais , pacotes personalizados para você </p>
-            
-          <a href="{% url 'cotacao' %}" style="color: white; background: #198754; padding: 8px 12px; text-decoration: none; border-radius: 4px; display: inline-block; margin-top: 10px; center">Solicitar orçamento</a>
-        </div>
-        </div>
-      </div>
-
-      <!-- Card 3 -->
-      <div style="width: 400px; border: 1px solid #ccc; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
-        <img src="{% static 'images/pacote3.png' %}" alt="Pacote 3" style="width: 100%; height: 350px; object-fit: cover;">
-        <div style="padding: 15px;">
-        <div style="text-align: center;">
-            <h2 style="font-size: 1.2em;">Cruzeiros marítimos e fluviais</h2>
-          <p>Oferecemos pacotes de viagem para cruzeiros marítimos e fluviais.</p>
-        <div style="text-align: center;"> 
-            <br> <br>
-          <a href="{% url 'cotacao' %}" style="color: white; background:#198754; padding: 8px 12px; text-decoration: none; border-radius: 4px; display: inline-block; margin-top: 10px; center">Solicitar orçamento</a>
-        </div>
-        </div>
-      </div>
-
     </div>
-    <!-- Card 4 -->
-      <div style="width: 400px; border: 1px solid #ccc; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
-        <img src="{% static 'images/pacote3.png' %}" alt="Pacote 3" style="width: 100%; height: 350px; object-fit: cover;">
-        <div style="padding: 15px;">
-        <div style="text-align: center;">
-            <h2 style="font-size: 1.2em;">Consultoria</h2>
-          <p>Um roteiro de viagem sem dor de cabeça.</p>
-        <div style="text-align: center;"> 
-            <br> <br><br>
-          <a href="{% url 'cotacao' %}" style="color: white; background:#198754; padding: 8px 12px; text-decoration: none; border-radius: 4px; display: inline-block; margin-top: 10px; center">Solicitar orçamento</a>
-        </div>
-        </div>
+
+    <!-- Card 2 -->
+    <div class="card shadow" style="width: 400px;">
+      <img src="{% static 'images/pacote2.jpg' %}" class="card-img-top" alt="Pacote 2" style="height: 350px; object-fit: cover;">
+      <div class="card-body text-center">
+        <h2 class="card-title">Pacotes de viagem nacionais e internacionais</h2>
+        <p class="card-text">Passagens aéreas, hotéis, seguro viagem, translados e muito mais. Pacotes personalizados para você.</p>
+        <a href="{% url 'cotacao' %}" class="btn btn-success mt-3">Solicitar orçamento</a>
       </div>
-
     </div>
-  </main>
 
-  {% include 'viagens/html/rodape.html' %}
+    <!-- Card 3 -->
+    <div class="card shadow" style="width: 400px;">
+      <img src="{% static 'images/pacote3.png' %}" class="card-img-top" alt="Pacote 3" style="height: 350px; object-fit: cover;">
+      <div class="card-body text-center">
+        <h2 class="card-title">Cruzeiros marítimos e fluviais</h2>
+        <p class="card-text">Oferecemos pacotes de viagem para cruzeiros marítimos e fluviais.</p>
+        <a href="{% url 'cotacao' %}" class="btn btn-success mt-3">Solicitar orçamento</a>
+      </div>
+    </div>
 
-</body>
-</html>
+  </div>
+</main>
+{% endblock %}

@@ -1,223 +1,204 @@
-
 :root {
-    --cor-laranja: #FF6600;         /* Laranja principal */
-    --cor-laranja-claro: #FFB366;   /* Laranja claro */
-    --cor-branco: #ffffff;
-    --cor-preto: #000000;
-    --cor-cinza-claro: #e9e9e977;
-    --cor-vermelho: #a71212;
-  }
-  
-  body {
-    background-color: var(--cor-branco);
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-  }
-  
-  header {
-    background-color: var(--cor-branco);
-    border: 100px;
-    padding: 10px 15px;
-  }
-  
-  nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    text-align: center;
-  }
-  
-  nav ul li {
-    display: inline-block;
-    margin-right: 10px;
-  }
-  
-  nav ul li:last-child {
-    margin-right: 0;
-  }
-  
-  nav ul li a {
-    color: var(--cor-preto);
-    text-decoration: none;
-    padding: 20px 25px;
-    border-radius: 15px;
-  }
-  
-  nav ul li a:hover {
-    background-color: var(--cor-laranja-claro);
-  }
-  
-  .icon-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: 10px;
-    text-align: center;
-    z-index: 1;
-  }
-  
-  .icon-container img {
-    width: 30px;
-    height: 30px;
-    margin-right: 10px;
-  }
-  
-  .machu {
-    width: 1200px;
-    height: 600px;
-    border-radius: 20px;
-    margin: auto;
-    display: block;
-    padding: 10px 15px;
-  }
-  
+  --cor-laranja: #FF6600;
+  --cor-laranja-claro: #FFB366;
+  --cor-branco: #ffffff;
+  --cor-preto: #000000;
+  --cor-cinza-claro: #e9e9e977;
+  --cor-vermelho: #a71212;
+}
+
+/* ======== BASE ======== */
+body {
+  background-color: var(--cor-branco);
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  color: var(--cor-laranja);
+  text-align: center;
+  font-size: 50px;
+}
+
+h3 {
+  color: var(--cor-laranja);
+  text-align: center;
+}
+
+p {
+  color: var(--cor-laranja);
+  text-align: center;
+  margin: 0;
+}
+
+.text-primary {
+  color: var(--cor-laranja) !important;
+}
+
+/* ======== NAVBAR ======== */
+.navbar {
+  background-color: var(--cor-laranja) !important;
+  transition: background-color 0.5s ease, box-shadow 0.5s ease;
+}
+
+.navbar.scrolled {
+  background-color: rgba(255, 159, 5, 0.8) !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.navbar .nav-link {
+  color: var(--cor-branco) !important;
+  transition: color 0.3s;
+}
+
+.navbar .nav-link:hover {
+  color: var(--cor-laranja-claro) !important;
+}
+
+/* ======== FORMULÁRIO ======== */
+.formulario-contato {
+  width: 30%;
+  min-width: 280px;
+}
+
+.formulario-contato form {
+  display: flex;
+  flex-direction: column;
+}
+
+.formulario-contato input,
+.formulario-contato button {
+  margin-bottom: 20px;
+  padding: 15px;
+  margin-left: 10px;
+  border-bottom-width: 2px;
+  border-color: transparent;
+  border-bottom-color: var(--cor-preto);
+}
+
+.formulario-contato input:hover {
+  border-color: var(--cor-preto);
+  border-radius: 5px;
+  border-width: 3px;
+}
+
+.formulario-contato button {
+  background-color: var(--cor-laranja);
+  color: var(--cor-branco);
+  cursor: pointer;
+  border-radius: 5px;
+  height: 110px;
+  width: 160px;
+  margin: auto;
+  margin-top: 10px;
+}
+
+.formulario-contato button:hover {
+  border-color: var(--cor-preto);
+  border-width: 3px;
+}
+
+.formulario-contato h1 {
+  font-size: 50px;
+}
+
+/* ======== ORÇAMENTO E CONTEÚDO ======== */
+.conteudo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 100px;
+  flex-wrap: wrap;
+  padding: 10px;
+}
+
+.imagem-orcamento {
+  width: 100%;
+  text-align: center;
+}
+
+.imagem-orcamento img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 20px;
+}
+
+.contato {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 2;
+  margin-bottom: 50px;
+}
+
+.contato p {
+  color: var(--cor-vermelho);
+  text-align: center;
+}
+
+/* ======== COMPONENTES ======== */
+.card {
+  border-color: var(--cor-laranja-claro);
+}
+
+.card-title {
+  color: var(--cor-laranja);
+}
+
+.carousel-img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+/* ======== RESPONSIVO (Mobile First) ======== */
+@media (max-width: 768px) {
   h1 {
-    color: var(--cor-laranja);
-    text-align: center;
-    font-size: 50px;
+    font-size: 32px;
   }
-  
-  h3 {
-    color: var(--cor-laranja);
-    text-align: center; 
-  }
-  
-  p {
-    color: var(--cor-laranja);
-    text-align: center;
-    margin: 0;
-  }
-  
-  .contato {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 2;
-    margin-bottom: 50px;
-  }
-  
-  .contato p {
-    color: var(--cor-vermelho);
-    text-align: center; 
-  }
-  
-  .conteudo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-    margin-bottom: 100px;
-  }
-  
+
   .formulario-contato {
-    width: 30%;
+    width: 90%;
   }
-  
-  .formulario-contato form, .msgorc {
-    display: flex;
+
+  .formulario-contato button {
+    width: 100%;
+  }
+
+  .carousel-img {
+    height: 250px;
+  }
+
+  .conteudo {
     flex-direction: column;
   }
-  
-  .formulario-contato input,
-  .formulario-contato button {
-    margin-bottom: 20px;
-    padding: 15px;
-    margin: 15px 0 0 10px;
-    border-bottom-width: 2px;  
-    border-color: transparent; 
-    border-bottom-color: var(--cor-preto);
+}
+
+@media (max-width: 991.98px) {
+  .navbar-collapse {
+    padding: 10px;
   }
-  
-  .formulario-contato input:hover {
-    border-color: var(--cor-preto);
-    border-radius: 5px;
-    border-width: 3px;
+
+  .navbar-nav {
+    flex-direction: column;
+    align-items: flex-start;
   }
-  
-  .formulario-contato button {
-    background-color: var(--cor-laranja);
-    color: var(--cor-branco);
-    cursor: pointer;
-    border-radius: 5px;
-    height: 110px;
-    width: 160px;
-    margin: auto;
-    margin-top: 10px;
+
+  .navbar-nav .nav-link {
+    padding: 10px 20px;
+    width: 100%;
   }
-  
-  .formulario-contato button:hover {
-    border-color: var(--cor-preto);
-    border-width: 3px;
-  }
-  
-  .formulario-contato h1 {
-    font-size: 50px;
-    position: static;
-  }
-  
-  .imagem-orcamento {
-    width: 50%;
-    text-align: center;
-  }
-  
-  .imagem-orcamento img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 20px;
-    margin-left: 140px;
-  }
-  
-  .dppaulo {
-    text-align: center;
-    background-color: var(--cor-cinza-claro);
-    font-size: x-large;
-    margin-top: 300px;
-  }
-  
-  .icone img {
-    width: 25px;
-    height: 25px;
-    margin-right: 10px;
-  }
-  .text-primary {
-    color: var(--cor-laranja) !important;
-  }
-  .navbar {
-    background-color: var(--cor-laranja) !important;
-  }
-  
-  .navbar .nav-link {
-    color: var(--cor-branco) !important;
-  }
-  
-  .navbar .nav-link:hover {
-    color: var(--cor-laranja-claro) !important;
-  }
-  .card {
-    border-color: var(--cor-laranja-claro);
-  }
-  
-  .card-title {
-    color: var(--cor-laranja);
-  }
-  nav ul li a {
-    color: var(--cor-laranja);
-    background-color: transparent;
-    transition: all 0.3s ease;
-  }
-  
-  nav ul li a:hover {
-    background-color: var(--cor-branco);
-    color: var(--cor-laranja) !important;
-  }
+}
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}

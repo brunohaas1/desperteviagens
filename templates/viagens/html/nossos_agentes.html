@@ -1,6 +1,9 @@
+{% extends "viagens/html/base.html" %}
 {% load static %}
-{% include "viagens/html/menu.html" %}
 
+{% block title %}Nossos Agentes - Desperte Viagens{% endblock %}
+
+{% block content %}
 <div class="container py-5">
   <h1 class="text-center text-primary mb-5">Conheça nossos agentes</h1>
 
@@ -9,9 +12,9 @@
     <!-- Agente 1 -->
     <div class="col">
       <div class="card h-100 shadow text-center">
-        <img src="{% static 'images/agentes/jessica.jpg' %}" class="card-img-top " alt="JESSICA FREITAS" style="height: 300px;object-fit: contain;">
+        <img src="{% static 'images/agentes/jessica.jpg' %}" class="card-img-top" alt="JESSICA FREITAS" style="height: 300px; object-fit: contain;">
         <div class="card-body">
-          <h5 class="card-title"style="font-size: 23px;">JESSICA FREITAS</h5>
+          <h5 class="card-title" style="font-size: 23px;">JESSICA FREITAS</h5>
           <p class="card-text text-muted" style="font-size: 17px;">Consultora de viagens</p>
         </div>
       </div>
@@ -20,7 +23,7 @@
     <!-- Agente 2 -->
     <div class="col">
       <div class="card h-100 shadow text-center">
-        <img src="{% static 'images/agentes/marcia.jpg' %}" class="card-img-top " alt="MARCIA HAAS" style="height: 300px;object-fit: contain;">
+        <img src="{% static 'images/agentes/marcia.jpg' %}" class="card-img-top" alt="MARCIA HAAS" style="height: 300px; object-fit: contain;">
         <div class="card-body">
           <h5 class="card-title" style="font-size: 23px;">MARCIA HAAS</h5>
           <p class="card-text text-muted" style="font-size: 17px;">Consultora de viagens</p>
@@ -28,9 +31,6 @@
       </div>
     </div>
 
-
-
   </div>
 </div>
-
-{% include "viagens/html/rodape.html" %}
+{% endblock %}
