@@ -1,8 +1,21 @@
-{% include "viagens/html/menu.html" %}
+{% extends "viagens/html/base.html" %}
+{% load static %}
 
-<div class="conteudo">
-    <h2>Solicitação enviada com sucesso!</h2><BR><br>
-    <p>Em breve entraremos em contato com você.</p>
+{% block title %}Orçamento Enviado - Desperte Viagens{% endblock %}
+
+{% block content %}
+<div class="container py-5 text-center" style="min-height: 70vh;">
+  <h2 class="text-success fw-bold mb-3">Solicitação enviada com sucesso!</h2>
+  <p class="lead">Em breve entraremos em contato com você.</p>
+  <p class="text-muted">Você será redirecionado para a página inicial em alguns segundos...</p>
+  <a href="{% url 'home' %}" class="btn btn-outline-success mt-3">Voltar para a Home</a>
 </div>
+{% endblock %}
 
-{% include "viagens/html/rodape.html" %}
+{% block scripts_extra %}
+<script>
+  setTimeout(function() {
+    window.location.href = "{% url 'home' %}";
+  }, 7000); // redireciona em 5 segundos
+</script>
+{% endblock %}
