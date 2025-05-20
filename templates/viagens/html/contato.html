@@ -1,33 +1,32 @@
+{% extends "viagens/html/base.html" %}
 {% load static %}
-{% include "viagens/html/menu.html" %}
 
-<!-- Estilos Locais -->
-<link rel="stylesheet" href="{% static 'vendor/aos/aos.css' %}">
+{% block head_extra %}
+  <link rel="stylesheet" href="{% static 'vendor/aos/aos.css' %}">
+  <style>
+    .contato-link {
+      transition: color 0.3s;
+    }
 
-<style>
-  .contato-link {
-    transition: color 0.3s;
-  }
+    .contato-link:hover {
+      color: #198754 !important; /* verde Bootstrap */
+    }
+  </style>
+{% endblock %}
 
-  .contato-link:hover {
-    color: #198754 !important; /* verde Bootstrap */
-  }
-</style>
-
-<!-- Conteúdo -->
+{% block content %}
 <div class="container py-5">
   <h2 class="text-center text-primary mb-5" data-aos="fade-down">Fale com a Desperte</h2>
 
   <div class="row g-5">
-
     <!-- Informações de Contato -->
-    <div class="col-md-6" data-aos="fade-right">
+    <div class="col-md-6 mx-auto" data-aos="fade-right">
       <div class="bg-light p-4 rounded shadow">
         <h5 class="fw-bold mb-3">Entre em Contato</h5>
 
         <div class="d-flex align-items-center mb-3">
           <span class="fs-5 me-2">📍</span>
-          <p class="mb-0">Rua das Pereiras, 569 - Montanha Lajeado/RS</p>
+          <p class="mb-0">Rua das Pereiras, 569 - Montanha, Lajeado/RS</p>
         </div>
 
         <div class="d-flex align-items-center mb-3">
@@ -50,19 +49,13 @@
             <a href="https://wa.me/5551997452112" target="_blank" class="text-decoration-none text-dark contato-link">Chamar no WhatsApp</a>
           </p>
         </div>
-
       </div>
     </div>
-
-
-
   </div>
 </div>
+{% endblock %}
 
-<!-- Scripts Locais -->
-<script src="{% static 'vendor/aos/aos.js' %}"></script>
-<script>
-  AOS.init();
-</script>
-
-{% include "viagens/html/rodape.html" %}
+{% block scripts_extra %}
+  <script src="{% static 'vendor/aos/aos.js' %}"></script>
+  <script>AOS.init();</script>
+{% endblock %}

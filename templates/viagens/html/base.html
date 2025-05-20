@@ -14,11 +14,13 @@
 
   {% block head_extra %}{% endblock %}
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 
   {% include "viagens/html/menu.html" %}
 
-  {% block content %}{% endblock %}
+  <main class="flex-fill">
+    {% block content %}{% endblock %}
+  </main>
 
   {% include "viagens/html/rodape.html" %}
 
