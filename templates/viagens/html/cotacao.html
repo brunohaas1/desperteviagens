@@ -1,71 +1,65 @@
+{% extends "viagens/html/base.html" %}
 {% load static %}
 {% load form_filters %}
-{% include "viagens/html/menu.html" %}
 
-<!-- Estilos Locais -->
-<link rel="stylesheet" href="{% static 'vendor/awesomplete/awesomplete.min.css' %}">
-<link rel="stylesheet" href="{% static 'vendor/flatpickr/flatpickr.min.css' %}">
-<link rel="stylesheet" href="{% static 'vendor/aos/aos.css' %}">
+{% block title %}Solicitar Orçamento - Desperte Viagens{% endblock %}
 
-<style>
-  .awesomplete {
-    display: block;
-    width: 100%;
-  }
-  .awesomplete mark {
-    background: transparent !important;
-    color: inherit !important;
-    font-weight: normal !important;
-    text-decoration: none !important;
-  }
-  .awesomplete input {
-    width: 100% !important;
-    box-sizing: border-box;
-  }
-</style>
+{% block head_extra %}
+  <link rel="stylesheet" href="{% static 'vendor/awesomplete/awesomplete.min.css' %}">
+  <link rel="stylesheet" href="{% static 'vendor/flatpickr/flatpickr.min.css' %}">
+  <link rel="stylesheet" href="{% static 'vendor/aos/aos.css' %}">
+  <style>
+    .awesomplete {
+      display: block;
+      width: 100%;
+    }
+    .awesomplete mark {
+      background: transparent !important;
+      color: inherit !important;
+      font-weight: normal !important;
+      text-decoration: none !important;
+    }
+    .awesomplete input {
+      width: 100% !important;
+      box-sizing: border-box;
+    }
+  </style>
+{% endblock %}
 
-<!-- Formulário -->
+{% block content %}
 <div class="container py-5">
   <div class="row justify-content-center align-items-center g-5">
 
-    <!-- Coluna Formulário -->
     <div class="col-md-6" data-aos="fade-right">
       <div class="p-4 bg-white rounded shadow" style="max-width: 500px; margin: auto;">
         <h2 class="text-center text-primary mb-4">Solicite um orçamento</h2>
         <form method="post">
           {% csrf_token %}
-
           <div class="mb-3">
             <label for="id_nome" class="form-label">Nome</label>
             {{ form.nome|add_class:"form-control" }}
           </div>
-
           <div class="mb-3">
             <label for="id_sobrenome" class="form-label">Sobrenome</label>
             {{ form.sobrenome|add_class:"form-control" }}
           </div>
-
           <div class="mb-3">
             <label for="id_email" class="form-label">Email</label>
             {{ form.email|add_class:"form-control" }}
           </div>
-
           <div class="mb-3">
             <label for="id_telefone" class="form-label">Telefone</label>
             {{ form.telefone|add_class:"form-control" }}
           </div>
-
           <div class="mb-3">
             <label for="id_destino" class="form-label">Destino</label>
             <input list="destinos" name="destino" id="id_destino" class="form-control" placeholder="Digite ou escolha um destino" autocomplete="off">
             {% include "viagens/html/destinos_list.html" %}
           </div>
-
           <div class="mb-3">
             <label for="id_data_viagem" class="form-label">Data da Viagem</label>
             {{ form.data_viagem|add_class:"form-control" }}
           </div>
-
           <div class="text-center">
             <button type="submit" class="btn btn-success">Enviar</button>
           </div>
@@ -73,61 +67,48 @@
       </div>
     </div>
 
-    <!-- Coluna Imagem -->
     <div class="col-md-6 text-center" data-aos="fade-left">
       <img src="{% static 'images/imgorc.png' %}" class="img-fluid" style="max-height: 800px;" alt="Imagem orçamento">
     </div>
 
   </div>
 </div>
+{% endblock %}
 
-<!-- Scripts Locais -->
-<script src="{% static 'vendor/jquery/jquery-3.7.1.min.js' %}"></script>
-<script src="{% static 'vendor/jquery-mask/jquery.mask.min.js' %}"></script>
-<script src="{% static 'vendor/awesomplete/awesomplete.min.js' %}"></script>
-<script src="{% static 'vendor/flatpickr/flatpickr.min.js' %}"></script>
-<script src="{% static 'vendor/flatpickr/pt.js' %}"></script>
-<script src="{% static 'vendor/aos/aos.js' %}"></script>
+{% block scripts_extra %}
+  <script src="{% static 'vendor/jquery/jquery-3.7.1.min.js' %}"></script>
+  <script src="{% static 'vendor/jquery-mask/jquery.mask.min.js' %}"></script>
+  <script src="{% static 'vendor/awesomplete/awesomplete.min.js' %}"></script>
+  <script src="{% static 'vendor/flatpickr/flatpickr.min.js' %}"></script>
+  <script src="{% static 'vendor/flatpickr/pt.js' %}"></script>
+  <script src="{% static 'vendor/aos/aos.js' %}"></script>
+  <script>
+    AOS.init();
 
-<script>
-  AOS.init();
-</script>
-
-<script>
-  // Máscara de telefone
-  $(document).ready(function(){
-    $('#id_telefone').mask('(00) 00000-0000');
-  });
-
-  // Autocomplete de Destinos
-  document.addEventListener('DOMContentLoaded', function() {
-    var input = document.getElementById("id_destino");
-    var datalist = document.getElementById("destinos");
-    var options = datalist.getElementsByTagName('option');
-  
-    var destinos = [];
-    for (var i = 0; i < options.length; i++) {
-      destinos.push(options[i].value);
-    }
-  
-    new Awesomplete(input, {
-      list: destinos,
-      minChars: 1,
-      maxItems: 10,
-      autoFirst: true
+    $(document).ready(function() {
+      $('#id_telefone').mask('(00) 00000-0000');
     });
-  });
 
-  // Calendário Flatpickr
-  document.addEventListener('DOMContentLoaded', function() {
-    flatpickr("#id_data_viagem", {
-      locale: "pt",
-      dateFormat: "d/m/Y",
-      allowInput: false,
-      altInput: true,
-      altFormat: "d/m/Y"
+    document.addEventListener('DOMContentLoaded', function() {
+      const input = document.getElementById("id_destino");
+      const datalist = document.getElementById("destinos");
+      const options = datalist.getElementsByTagName('option');
+      const destinos = Array.from(options).map(opt => opt.value);
+
+      new Awesomplete(input, {
+        list: destinos,
+        minChars: 1,
+        maxItems: 10,
+        autoFirst: true
+      });
+
+      flatpickr("#id_data_viagem", {
+        locale: "pt",
+        dateFormat: "d/m/Y",
+        allowInput: false,
+        altInput: true,
+        altFormat: "d/m/Y"
+      });
     });
-  });
-</script>
-
-{% include "viagens/html/rodape.html" %}
+  </script>
+{% endblock %}

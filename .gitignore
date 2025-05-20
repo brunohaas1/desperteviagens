@@ -44,3 +44,4 @@ dist/
 # Ignora arquivos de testes temporários
 .coverage
 htmlcov/*.pyc
+*.pyc

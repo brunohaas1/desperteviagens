@@ -1,15 +1,25 @@
-{% include "viagens/html/menu.html" %}
+{% extends "viagens/html/base.html" %}
+{% load static %}
 
-<br>
-<h1>TUDO SOBRE NÓS</h1>
-<br><br><br>
-<p>Soluções para os seus maiores sonhos
+{% block title %}Sobre Nós - Desperte Viagens{% endblock %}
 
-    Na Desperte Viagens, nossa prioridade é a satisfação completa do cliente.<br> Iniciamos nossas atividades em Lajeado, em 2019. Com ampla experiência, conhecimento e contatos de longa data,<br> trabalhamos para que cada experiência de viagem supere as altas expectativas dos clientes.<br>
-    
-    <br>
-    <br>
-    Seja qual for o tipo de viagem em que você está pensando, saiba que nós temos expertise para  <br>planejá-la com facilidade. Então, conte conosco para organizar a SUA viagem. </p>
-    <br><br><br><br><br><br><br><br>
+{% block content %}
+<section class="container py-5">
+  <h1 class="text-center text-primary mb-5">Tudo sobre nós</h1>
 
-    {% include "viagens/html/rodape.html" %}
+  <p class="lead text-center">
+    Soluções para os seus maiores sonhos
+  </p>
+
+  <p class="text-center">
+    Na Desperte Viagens, nossa prioridade é a satisfação completa do cliente.<br>
+    Iniciamos nossas atividades em Lajeado, em 2019. Com ampla experiência, conhecimento e contatos de longa data,<br>
+    trabalhamos para que cada experiência de viagem supere as altas expectativas dos clientes.
+  </p>
+
+  <p class="text-center mt-4">
+    Seja qual for o tipo de viagem em que você está pensando, saiba que nós temos expertise para<br>
+    planejá-la com facilidade. Então, conte conosco para organizar a SUA viagem.
+  </p>
+</section>
+{% endblock %}
