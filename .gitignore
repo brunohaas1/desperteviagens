@@ -43,6 +43,14 @@ dist/
 
 # Ignora arquivos de testes temporários
 .coverage
+<<<<<<< HEAD
 htmlcov/*.pyc
 *.pyc
+db.sqlite3
+=======
+htmlcov/
+
+/media/documentos_viagem/*
+!/media/documentos_viagem/.gitkeep
+>>>>>>> 084e7f93541bd6c643063f128887dde13148c39c
 db.sqlite3

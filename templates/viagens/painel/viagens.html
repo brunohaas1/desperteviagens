@@ -1,0 +1,84 @@
+{% extends "viagens/painel/base_dashboard.html" %}
+{% block title %}Viagens - Painel Administrativo{% endblock %}
+
+{% block content %}
+<h2><i class="fas fa-suitcase-rolling me-2"></i>Viagens</h2>
+
+<div class="table-responsive mt-4">
+    <form method="get" class="row g-3 align-items-end mb-4">
+    <div class="col-md-4">
+  <label>Cliente</label>
+  <input type="text" name="cliente_nome" class="form-control" placeholder="Digite o nome do cliente" value="{{ cliente_ativo|default_if_none:'' }}">
+
+</div>
+  <div class="col-md-4">
+    <label>Status</label>
+    <select name="status" class="form-select">
+      <option value="">Todos</option>
+      <option value="Pendente" {% if status_ativo == "Pendente" %}selected{% endif %}>Pendente</option>
+      <option value="Confirmada" {% if status_ativo == "Confirmada" %}selected{% endif %}>Confirmada</option>
+      <option value="Cancelada" {% if status_ativo == "Cancelada" %}selected{% endif %}>Cancelada</option>
+    </select>
+  </div>
+  
+  <div class="col-md-4">
+    <button type="submit" class="btn btn-success w-100">Filtrar</button>
+  </div>
+</form>
+
+  <table class="table table-bordered table-hover align-middle">
+    <thead class="table-warning">
+      <tr>
+        <th>Cliente</th>
+        <th>Destino</th>
+        <th>Data Ida</th>
+        <th>Data Volta</th>
+        <th>Valor</th>
+        <th>Status</th>
+        <th>Documentos</th>
+        <th>Anexar</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for viagem in viagens %}
+      <tr>
+        <td>{{ viagem.cliente.nome }}</td>
+        <td>{{ viagem.destino }}</td>
+        <td>{{ viagem.data_ida|date:"d/m/Y" }}</td>
+        <td>{{ viagem.data_volta|date:"d/m/Y" }}</td>
+        <td>R$ {{ viagem.valor|floatformat:2 }}</td>
+        <td>{{ viagem.status }}</td>
+        <td>
+          {% if viagem.documentos_viagem.all %}
+            <ul class="list-unstyled mb-0">
+              {% for doc in viagem.documentos_viagem.all %}
+                <li>
+                  <a href="{{ doc.arquivo.url }}" target="_blank">{{ doc.arquivo.name|cut:'documentos/' }}</a>
+                  <form method="post" action="{% url 'painel:delete_documento' doc.id %}" class="d-inline" onsubmit="return confirm('Deseja excluir este documento?');">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-sm btn-link text-danger" title="Excluir">
+                      <i class="fas fa-trash-alt"></i>
+                    </button>
+                  </form>
+                </li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <span class="text-muted">Nenhum</span>
+          {% endif %}
+        </td>
+        <td>
+          <a href="{% url 'painel:adicionar_documento' viagem.id %}" class="btn btn-sm btn-outline-primary mt-2">
+            📎 Anexar
+          </a>
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="8" class="text-center">Nenhuma viagem cadastrada.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

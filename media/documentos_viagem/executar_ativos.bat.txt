@@ -1,3 +1,0 @@
-@echo off
-cd "C:\Users\Bruno\Desktop\Selenium_Planmilha"  :: Substitua pelo caminho correto
-python ss.py

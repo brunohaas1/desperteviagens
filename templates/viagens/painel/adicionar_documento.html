@@ -1,0 +1,17 @@
+{% extends "viagens/painel/base_dashboard.html" %}
+{% block title %}Anexar Documento{% endblock %}
+
+{% block content %}
+  <h2 class="mb-4">📎 Anexar Documento à Viagem de {{ viagem.cliente.nome }}</h2>
+
+  <form method="post" enctype="multipart/form-data" class="border rounded p-4 shadow-sm bg-light">
+    {% csrf_token %}
+    <div class="mb-3">
+      {{ form.arquivo.label_tag }}
+      {{ form.arquivo }}
+    </div>
+
+    <button type="submit" class="btn btn-success">Salvar</button>
+    <a href="{% url 'painel:lista_documentos' %}" class="btn btn-secondary">Cancelar</a>
+  </form>
+{% endblock %}
