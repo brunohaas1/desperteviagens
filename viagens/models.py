@@ -1,6 +1,6 @@
 from django.db import models
 from datetime import timedelta
-
+import os
 
 class SolicitacaoOrcamento(models.Model):
     nome = models.CharField(max_length=100)
@@ -55,9 +55,13 @@ class Viagem(models.Model):
 
 
 class DocumentoViagem(models.Model):
-    viagem = models.ForeignKey('Viagem', on_delete=models.CASCADE, related_name='documentos_viagem')
+    viagem = models.ForeignKey('Viagem', on_delete=models.CASCADE, related_name="documentos_viagem")
     arquivo = models.FileField(upload_to='documentos_viagem/')
 
-    def __str__(self):
-        return f"Documento ({self.viagem.destino})"
+    def delete(self, *args, **kwargs):
+        # Deleta o arquivo físico
+        if self.arquivo and os.path.isfile(self.arquivo.path):
+            os.remove(self.arquivo.path)
+        # Depois remove do banco
+        super().delete(*args, **kwargs)
     

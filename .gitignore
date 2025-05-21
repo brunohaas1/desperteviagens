@@ -44,3 +44,6 @@ dist/
 # Ignora arquivos de testes temporários
 .coverage
 htmlcov/
+
+/media/documentos_viagem/*
+!/media/documentos_viagem/.gitkeep
