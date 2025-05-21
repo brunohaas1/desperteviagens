@@ -15,4 +15,6 @@ urlpatterns = [
     path('sobre-nos/', views.sobre_nos, name='sobre_nos'),
     path('nossos-agentes/', views.nossos_agentes, name='nossos_agentes'),
     path('produtos/', views.produtos, name='produtos'),
+    path("painel-viagens/clientes/", views.lista_clientes, name="lista_clientes"),
+    
 ]

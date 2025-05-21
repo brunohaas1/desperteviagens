@@ -2,7 +2,6 @@ from django.contrib import admin
 from django.contrib.admin import AdminSite
 from django.utils.translation import gettext_lazy as _
 from .models import Viagem, Cliente, DocumentoViagem
-from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 from django.urls import reverse
 from django.shortcuts import redirect
@@ -95,5 +94,7 @@ class ViagemAdminCustomizado(admin.ModelAdmin):
 
 # Registro dos dois no painel novo
 custom_admin_site.register(Cliente, ClienteAdminCustomizado)
-#custom_admin_site.register(Viagem, ViagemAdminCustomizado)
+custom_admin_site.register(Viagem, ViagemAdminCustomizado)
 custom_admin_site.register(DocumentoViagem, DocumentoViagemAdmin)
+
+

@@ -1,0 +1,52 @@
+{% extends "viagens/painel/base_dashboard.html" %}
+{% block title %}Clientes - Painel Administrativo{% endblock %}
+
+{% block content %}
+  <h2 class="mb-4"><i class="fas fa-users me-2"></i>Clientes Cadastrados</h2>
+    <form method="get" class="mb-4 row g-3 align-items-end">
+  <div class="col-md-6">
+    <label for="busca">Buscar por nome ou CPF</label>
+    <input type="text" name="busca" id="busca" class="form-control" value="{{ busca|default_if_none:''  }}">
+  </div>
+  <div class="col-md-3">
+    <button type="submit" class="btn btn-primary w-100">Buscar</button>
+  </div>
+</form>
+  <a href="{% url 'painel:adicionar_cliente' %}" class="btn btn-primary mb-3">
+  <i class="fas fa-plus"></i> Novo Cliente
+</a>
+  <table class="table table-bordered table-striped">
+    <thead class="table-warning">
+      <tr>
+        <th>Nome</th>
+        <th>CPF</th>
+        <th>Email</th>
+        <th>Telefone</th>
+        <th>Ações</th>
+        <th>Viagens</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for cliente in clientes %}
+      <tr>
+        <td>{{ cliente.nome }}</td>
+        <td>{{ cliente.cpf }}</td>
+        <td>{{ cliente.email }}</td>
+        <td>{{ cliente.telefone }}</td>
+        <td>
+          <a href="#" class="btn btn-sm btn-primary disabled">Ver</a>
+        </td>
+        <td>
+            <a href="{% url 'painel:adicionar_viagem' cliente.id %}" class="btn btn-sm btn-outline-success">
+  ➕ AdicionarViagem
+</a>
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="5" class="text-center">Nenhum cliente encontrado.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
