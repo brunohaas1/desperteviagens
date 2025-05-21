@@ -45,3 +45,4 @@ dist/
 .coverage
 htmlcov/*.pyc
 *.pyc
+db.sqlite3
