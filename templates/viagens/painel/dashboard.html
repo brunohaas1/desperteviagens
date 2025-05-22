@@ -32,6 +32,13 @@
     <h2>R$ {{ faturamento_mes|floatformat:2 }}</h2>
   </div>
 </div>
+<div class="col-md-4">
+  <div class="border border-success rounded text-center p-4">
+    <h5>Agenda</h5>
+    <a href="{% url 'painel:agenda_viagens' %}"><i class="fas fa-calendar-alt me-2"></i></a>
+
+  </div>
+  <BR>
 <div class="mt-5">
   <h4 class="mb-3"><i class="fas fa-plane-departure me-2"></i>Viagens nos próximos 7 dias</h4>
   {% if proximas_viagens %}

@@ -9,6 +9,26 @@ from django.db.models import Q
 from django.utils.timezone import now
 from django.db.models import Sum
 from datetime import timedelta
+import openpyxl
+from django.http import HttpResponse
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import A4
+import pandas as pd
+from django.http import JsonResponse
+from django.utils.text import slugify
+from django.template.loader import get_template
+from django.http import HttpResponse
+from reportlab.pdfgen import canvas
+from reportlab.lib.units import cm 
+from reportlab.lib import colors
+from django.http import FileResponse
+import os
+from io import BytesIO
+from django.conf import settings
+from reportlab.lib.utils import ImageReader
+from xhtml2pdf import pisa
+from pathlib import Path
+
 def home(request):
     return render(request, 'viagens/html/home.html')
 
@@ -159,3 +179,159 @@ def adicionar_documento(request, viagem_id):
         "form": form,
         "viagem": viagem
     })
+
+def exportar_viagens_excel(request):
+    wb = openpyxl.Workbook()
+    ws = wb.active
+    ws.title = "Viagens"
+
+    ws.append(['Cliente', 'Destino', 'Data Ida', 'Data Volta', 'Valor', 'Status'])
+
+    for viagem in Viagem.objects.select_related('cliente').all():
+        ws.append([
+            viagem.cliente.nome,
+            viagem.destino,
+            viagem.data_ida.strftime('%d/%m/%Y'),
+            viagem.data_volta.strftime('%d/%m/%Y'),
+            f"{viagem.valor:.2f}",
+            viagem.status
+        ])
+
+    response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    response['Content-Disposition'] = 'attachment; filename=relatorio_viagens.xlsx'
+    wb.save(response)
+    return response
+
+def exportar_viagens_pdf(request):
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="relatorio_viagens.pdf"'
+
+    p = canvas.Canvas(response, pagesize=A4)
+    width, height = A4
+
+    p.setFont("Helvetica-Bold", 16)
+    p.drawString(200, height - 50, "Relatório de Viagens")
+
+    p.setFont("Helvetica", 10)
+    y = height - 100
+
+    viagens = Viagem.objects.select_related('cliente').all()
+
+    p.drawString(40, y, "Cliente")
+    p.drawString(150, y, "Destino")
+    p.drawString(250, y, "Ida")
+    p.drawString(300, y, "Volta")
+    p.drawString(370, y, "Valor")
+    p.drawString(430, y, "Status")
+
+    y -= 20
+
+    for v in viagens:
+        if y < 60:  # Nova página se estiver muito abaixo
+            p.showPage()
+            p.setFont("Helvetica", 10)
+            y = height - 50
+
+        p.drawString(40, y, v.cliente.nome[:20])
+        p.drawString(150, y, v.destino[:15])
+        p.drawString(250, y, v.data_ida.strftime('%d/%m/%Y'))
+        p.drawString(300, y, v.data_volta.strftime('%d/%m/%Y'))
+        p.drawString(370, y, f"R$ {v.valor:.2f}")
+        p.drawString(430, y, v.status)
+
+        y -= 20
+
+    p.showPage()
+    p.save()
+    return response
+
+def exportar_clientes_pdf(request):
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="relatorio_clientes.pdf"'
+
+    p = canvas.Canvas(response, pagesize=A4)
+    width, height = A4
+
+    p.setFont("Helvetica-Bold", 16)
+    p.drawString(200, height - 50, "Relatório de Clientes")
+
+    p.setFont("Helvetica", 10)
+    y = height - 100
+
+    p.drawString(40, y, "Nome")
+    p.drawString(200, y, "CPF")
+    p.drawString(300, y, "E-mail")
+    p.drawString(430, y, "Telefone")
+
+    y -= 20
+
+    for cliente in Cliente.objects.all():
+        if y < 60:
+            p.showPage()
+            p.setFont("Helvetica", 10)
+            y = height - 50
+
+        p.drawString(40, y, cliente.nome[:25])
+        p.drawString(200, y, cliente.cpf or "-")
+        p.drawString(300, y, cliente.email[:20] or "-")
+        p.drawString(430, y, cliente.telefone or "-")
+        y -= 20
+
+    p.showPage()
+    p.save()
+    return response
+
+
+def exportar_clientes_excel(request):
+    clientes = Cliente.objects.all().values("nome", "cpf", "email", "telefone", "data_nascimento")
+    df = pd.DataFrame(clientes)
+
+    response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    response['Content-Disposition'] = 'attachment; filename=relatorio_clientes.xlsx'
+    
+    with pd.ExcelWriter(response, engine='openpyxl') as writer:
+        df.to_excel(writer, index=False, sheet_name='Clientes')
+    
+    return response
+
+@staff_member_required
+def agenda_viagens(request):
+    return render(request, "viagens/painel/agenda.html")
+
+
+
+def eventos_viagens(request):
+    eventos = []
+    for viagem in Viagem.objects.all():
+        eventos.append({
+            "title": f"{viagem.cliente.nome} - {viagem.destino}",
+            "start": viagem.data_ida.isoformat(),
+            "end": viagem.data_volta.isoformat(),
+        })
+    return JsonResponse(eventos, safe=False)
+
+def link_callback(uri, rel):
+    """
+    Retorna o caminho físico correto para imagens locais.
+    """
+    result = os.path.join(settings.BASE_DIR, uri.replace(settings.STATIC_URL, "static/"))
+    return result
+def gerar_contrato_pdf(request, viagem_id):
+    viagem = Viagem.objects.get(id=viagem_id)
+
+    template = get_template("viagens/painel/contrato.html")
+    html = template.render({
+        "viagem": viagem,
+    })
+
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'inline; filename="contrato.pdf"'
+
+    pisa_status = pisa.CreatePDF(
+        html, dest=response, link_callback=link_callback
+    )
+
+    if pisa_status.err:
+        return HttpResponse("Erro ao gerar PDF", status=500)
+
+    return response

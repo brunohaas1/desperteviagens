@@ -3,8 +3,15 @@
 
 {% block content %}
 <h2><i class="fas fa-suitcase-rolling me-2"></i>Viagens</h2>
+<a href="{% url 'painel:exportar_viagens_excel' %}" class="btn btn-success mb-3">
+  📥 Exportar Excel
+</a>
+<a href="{% url 'painel:exportar_viagens_pdf' %}" class="btn btn-danger mb-3">
+  📄 Exportar PDF
+</a>
 
 <div class="table-responsive mt-4">
+
     <form method="get" class="row g-3 align-items-end mb-4">
     <div class="col-md-4">
   <label>Cliente</label>
@@ -37,6 +44,7 @@
         <th>Status</th>
         <th>Documentos</th>
         <th>Anexar</th>
+        <th>Contrato</th>
       </tr>
     </thead>
     <tbody>
@@ -72,6 +80,12 @@
             📎 Anexar
           </a>
         </td>
+        <td>
+  <a href="{% url 'painel:gerar_contrato_pdf' viagem.id %}" class="btn btn-sm btn-outline-secondary" target="_blank">
+    🖨️ Visualizar/Imprimir Contrato
+  </a>
+</td>
+
       </tr>
       {% empty %}
       <tr>
