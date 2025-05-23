@@ -13,14 +13,22 @@ class SolicitacaoOrcamento(models.Model):
 
     def __str__(self):
         return f"{self.nome} {self.sobrenome} - {self.destino}"
+
 class Cliente(models.Model):
     nome = models.CharField(max_length=150)
-    cpf = models.CharField(max_length=14, unique=True)
-    email = models.EmailField()
-    telefone = models.CharField(max_length=20)
-    data_nascimento = models.DateField(null=True, blank=True)
-    data_cadastro = models.DateTimeField(auto_now_add=True, null=True)  # Novo campo automático
-
+    email = models.EmailField(blank=True, null=True)
+    cpf = models.CharField(max_length=14, blank=True, null=True)  # Formato CPF com máscara opcional
+    endereco = models.CharField(max_length=255, blank=True, null=True)
+    numero = models.CharField(max_length=10, blank=True, null=True)
+    complemento = models.CharField(max_length=100, blank=True, null=True)
+    bairro = models.CharField(max_length=100, blank=True, null=True)
+    cep = models.CharField(max_length=9, blank=True, null=True)  # Formato CEP
+    cidade = models.CharField(max_length=100, blank=True, null=True)
+    uf = models.CharField(max_length=2, blank=True, null=True)  # Sigla do estado
+    celular = models.CharField(max_length=20, blank=True, null=True)
+    telefone = models.CharField(max_length=20, blank=True, null=True)
+    data_nascimento = models.DateField(blank=True, null=True)
+    data_cadastro = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     def __str__(self):
         return self.nome
 
@@ -31,7 +39,7 @@ class Viagem(models.Model):
         ('cancelada', 'Cancelada'),
     ]
 
-    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE, related_name='viagens')
+    clientes = models.ManyToManyField(Cliente)
     destino = models.CharField(max_length=150)
     data_ida = models.DateField()
     data_volta = models.DateField()
@@ -40,7 +48,8 @@ class Viagem(models.Model):
     data_cadastro = models.DateTimeField(auto_now_add=True, null=True)  # Novo campo automático
 
     def __str__(self):
-        return f"{self.destino} - {self.cliente.nome}"
+        nomes = ", ".join([c.nome for c in self.clientes.all()])
+        return f"{self.destino} - {nomes}"
 
     @property
     def duracao_viagem(self):
@@ -64,4 +73,3 @@ class DocumentoViagem(models.Model):
             os.remove(self.arquivo.path)
         # Depois remove do banco
         super().delete(*args, **kwargs)
-    

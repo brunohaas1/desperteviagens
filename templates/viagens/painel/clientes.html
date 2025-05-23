@@ -42,7 +42,8 @@
         <td>{{ cliente.email }}</td>
         <td>{{ cliente.telefone }}</td>
         <td>
-          <a href="#" class="btn btn-sm btn-primary disabled">Ver</a>
+          <a href="{% url 'painel:editar_cliente' cliente.id %}" class="btn btn-sm btn-warning">Editar</a>
+
         </td>
         <td>
             <a href="{% url 'painel:adicionar_viagem' cliente.id %}" class="btn btn-sm btn-outline-success">

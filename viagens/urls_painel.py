@@ -14,7 +14,9 @@ from .views import (
     exportar_clientes_excel,
     agenda_viagens,
     eventos_viagens,
-    gerar_contrato_pdf,
+    gerar_contrato_docx,
+    buscar_clientes,
+    editar_cliente,
 )
 
 urlpatterns = [
@@ -32,7 +34,8 @@ urlpatterns = [
     path('clientes/exportar-excel/', exportar_clientes_excel, name='exportar_clientes_excel'),
     path("agenda/", agenda_viagens, name="agenda_viagens"),
     path("agenda/eventos/", eventos_viagens, name="eventos_viagens"),
-    path("viagens/<int:viagem_id>/contrato/", gerar_contrato_pdf, name="gerar_contrato_pdf"),
-
+    path('clientes/<int:cliente_id>/viagens/<int:viagem_id>/contrato-docx/', gerar_contrato_docx, name='gerar_contrato_docx'),
+    path("clientes/buscar/", buscar_clientes, name="buscar_clientes"),
+    path("clientes/<int:cliente_id>/editar/", editar_cliente, name="editar_cliente"),
 
 ]

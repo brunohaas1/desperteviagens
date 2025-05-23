@@ -1,13 +1,99 @@
 {% extends "viagens/painel/base_dashboard.html" %}
+{% load static %}
+
 {% block title %}Nova Viagem{% endblock %}
 
 {% block content %}
-  <h2 class="mb-4">➕ Nova Viagem para {{ cliente.nome }}</h2>
+<h2 class="mb-4">➕ Nova Viagem para {{ cliente.nome }}</h2>
 
-  <form method="post" class="border p-4 rounded shadow-sm bg-light">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-success">Salvar</button>
-    <a href="{% url 'painel:lista_clientes' %}" class="btn btn-secondary">Cancelar</a>
-  </form>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+<form method="post" class="border p-4 rounded shadow-sm bg-light">
+  {% csrf_token %}
+
+  <div class="mb-3 row align-items-center">
+    <label for="id_clientes" class="col-sm-2 col-form-label">Clientes</label>
+    <div class="col-sm-10">
+      {{ form.clientes }}
+      {{ form.clientes.errors }}
+    </div>
+  </div>
+
+  <div class="mb-3 row align-items-center">
+    <label for="id_destino" class="col-sm-2 col-form-label">Destino</label>
+    <div class="col-sm-10">
+      {{ form.destino }}
+      {{ form.destino.errors }}
+    </div>
+  </div>
+
+  <div class="mb-3 row align-items-center">
+    <label for="id_data_ida" class="col-sm-2 col-form-label">Data ida</label>
+    <div class="col-sm-10">
+      {{ form.data_ida }}
+      {{ form.data_ida.errors }}
+    </div>
+  </div>
+
+  <div class="mb-3 row align-items-center">
+    <label for="id_data_volta" class="col-sm-2 col-form-label">Data volta</label>
+    <div class="col-sm-10">
+      {{ form.data_volta }}
+      {{ form.data_volta.errors }}
+    </div>
+  </div>
+
+  <div class="mb-3 row align-items-center">
+    <label for="id_valor" class="col-sm-2 col-form-label">Valor</label>
+    <div class="col-sm-10">
+      {{ form.valor }}
+      {{ form.valor.errors }}
+    </div>
+  </div>
+
+  <div class="mb-3 row align-items-center">
+    <label for="id_status" class="col-sm-2 col-form-label">Status</label>
+    <div class="col-sm-10">
+      {{ form.status }}
+      {{ form.status.errors }}
+    </div>
+  </div>
+
+  <div class="mb-3 row">
+    <div class="offset-sm-2 col-sm-10">
+      <button type="submit" class="btn btn-success">Salvar</button>
+      <a href="{% url 'painel:lista_clientes' %}" class="btn btn-secondary">Cancelar</a>
+    </div>
+  </div>
+</form>
+
+<style>
+  .select2-container--default .select2-selection--multiple {
+    min-height: 38px;
+  }
+</style>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<script>
+  $(document).ready(function () {
+    $('#id_clientes').select2({
+      width: '200px',
+      placeholder: 'Digite o nome do cliente',
+      allowClear: true,
+      ajax: {
+        url: '{% url 'painel:buscar_clientes' %}',
+        dataType: 'json',
+        delay: 250,
+        data: function (params) {
+          return { q: params.term };
+        },
+        processResults: function (data) {
+          return { results: data.results };
+        }
+      }
+    });
+  });
+</script>
 {% endblock %}

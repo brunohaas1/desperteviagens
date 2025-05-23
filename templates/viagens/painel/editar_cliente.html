@@ -1,0 +1,13 @@
+{% extends "viagens/painel/base_dashboard.html" %}
+{% block title %}Editar Cliente - {{ cliente.nome }}{% endblock %}
+
+{% block content %}
+  <h2 class="mb-4">✏️ Editar Cliente: {{ cliente.nome }}</h2>
+
+  <form method="post" class="border p-4 rounded shadow-sm bg-light" style="max-width: 600px;">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+    <a href="{% url 'painel:lista_clientes' %}" class="btn btn-secondary">Cancelar</a>
+  </form>
+{% endblock %}

@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'viagens.apps.ViagensConfig',
     'django.contrib.sitemaps',
+    'django_select2',
 ]
 
 MIDDLEWARE = [

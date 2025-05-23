@@ -42,12 +42,12 @@ class DocumentoViagemInline(admin.TabularInline):
     show_change_link = False
 
 # Inline de Viagens dentro do Cliente
-class ViagemInline(admin.TabularInline):
-    model = Viagem
-    extra = 1
-    fields = ('destino', 'data_ida', 'data_volta', 'valor', 'status', 'documentos_list')
-    readonly_fields = ('documentos_list',)
-    show_change_link = True
+#class ViagemInline(admin.TabularInline):
+    #model = Viagem
+   # extra = 1
+   # fields = ('destino', 'data_ida', 'data_volta', 'valor', 'status', 'documentos_list')
+    #readonly_fields = ('documentos_list',)
+    #show_change_link = True
 
     def documentos_list(self, obj):
         if obj.id:
@@ -80,18 +80,36 @@ class ViagemInline(admin.TabularInline):
 
 # Admin personalizado para Cliente
 class ClienteAdminCustomizado(admin.ModelAdmin):
-    list_display = ('nome', 'cpf', 'email', 'telefone')
-    search_fields = ('nome', 'cpf', 'email')
-    list_filter = ('data_nascimento',)
-    inlines = [ViagemInline]  # Aqui adicionamos Inline de Viagens dentro do Cliente!
+    list_display = (
+        'nome', 'cpf', 'email', 'telefone', 'celular', 'endereco', 'numero', 'complemento',
+        'bairro', 'cep', 'cidade', 'uf', 'viagens_relacionadas'
+    )
+    search_fields = ('nome', 'cpf', 'email', 'telefone', 'celular', 'endereco', 'cidade')
+    list_filter = ('data_nascimento', 'uf')
+    readonly_fields = ('viagens_relacionadas',)
 
+    def viagens_relacionadas(self, obj):
+        viagens = obj.viagem_set.all()
+        if not viagens:
+            return "Nenhuma viagem"
+        links = []
+        for viagem in viagens:
+            url = reverse("viagens_admin:viagens_viagem_change", args=[viagem.id])
+            link = f'<a href="{url}">{viagem.destino} ({viagem.data_ida.strftime("%d/%m/%Y")})</a>'
+            links.append(link)
+        return mark_safe("<br>".join(links))
+    
+    viagens_relacionadas.short_description = "Viagens"
 # Admin personalizado para Viagem
 class ViagemAdminCustomizado(admin.ModelAdmin):
-    list_display = ('cliente', 'destino', 'data_ida', 'data_volta', 'status')
-    search_fields = ('cliente__nome', 'destino')
+    list_display = ('destino', 'listar_clientes', 'data_ida', 'data_volta', 'status')
+    search_fields = ('clientes__nome', 'destino')
     list_filter = ('data_ida', 'status')
-    inlines = [DocumentoViagemInline]  # Aqui adicionamos Inline de Documentos dentro da Viagem!
+    inlines = [DocumentoViagemInline]
 
+    def listar_clientes(self, obj):
+        return ", ".join([cliente.nome for cliente in obj.clientes.all()])
+    listar_clientes.short_description = 'Clientes'
 # Registro dos dois no painel novo
 custom_admin_site.register(Cliente, ClienteAdminCustomizado)
 custom_admin_site.register(Viagem, ViagemAdminCustomizado)

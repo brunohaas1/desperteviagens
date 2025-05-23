@@ -50,7 +50,9 @@
     <tbody>
       {% for viagem in viagens %}
       <tr>
-        <td>{{ viagem.cliente.nome }}</td>
+        <td>{% for c in viagem.clientes.all %}
+    {{ c.nome }}{% if not forloop.last %}, {% endif %}
+  {% endfor %}</td>
         <td>{{ viagem.destino }}</td>
         <td>{{ viagem.data_ida|date:"d/m/Y" }}</td>
         <td>{{ viagem.data_volta|date:"d/m/Y" }}</td>
@@ -81,9 +83,10 @@
           </a>
         </td>
         <td>
-  <a href="{% url 'painel:gerar_contrato_pdf' viagem.id %}" class="btn btn-sm btn-outline-secondary" target="_blank">
-    🖨️ Visualizar/Imprimir Contrato
-  </a>
+            <a href="{% url 'painel:gerar_contrato_docx' viagem.clientes.first.id viagem.id %}" class="btn btn-outline-primary btn-sm" target="_blank">
+  📄 Gerar Contrato
+</a>
+
 </td>
 
       </tr>

@@ -1,4 +1,5 @@
 {% extends "viagens/painel/base_dashboard.html" %}
+
 {% block title %}Adicionar Cliente{% endblock %}
 
 {% block content %}
@@ -6,8 +7,121 @@
 
   <form method="post" class="border p-4 rounded shadow-sm bg-light">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-success">Salvar</button>
-    <a href="{% url 'painel:lista_clientes' %}" class="btn btn-secondary">Cancelar</a>
+
+    <div class="mb-3 row align-items-center">
+      <label for="{{ form.nome.id_for_label }}" class="col-sm-3 col-form-label">Nome</label>
+      <div class="col-sm-9">
+        {{ form.nome }}
+        {{ form.nome.errors }}
+      </div>
+    </div>
+
+    <div class="mb-3 row align-items-center">
+      <label for="{{ form.cpf.id_for_label }}" class="col-sm-3 col-form-label">CPF</label>
+      <div class="col-sm-9">
+        {{ form.cpf }}
+        {{ form.cpf.errors }}
+      </div>
+    </div>
+    <div class="mb-3 row align-items-center">
+      <label for="{{ form.email.id_for_label }}" class="col-sm-3 col-form-label">Email</label>
+      <div class="col-sm-9">
+        {{ form.email }}
+        {{ form.email.errors }}
+      </div>
+    </div>
+    <div class="mb-3 row align-items-center">
+      <label for="{{ form.endereco.id_for_label }}" class="col-sm-3 col-form-label">Endereço</label>
+      <div class="col-sm-9">
+        {{ form.endereco }}
+        {{ form.endereco.errors }}
+      </div>
+    </div>
+
+    <div class="mb-3 row align-items-center">
+      <label for="{{ form.numero.id_for_label }}" class="col-sm-3 col-form-label">Número</label>
+      <div class="col-sm-9">
+        {{ form.numero }}
+        {{ form.numero.errors }}
+      </div>
+    </div>
+
+    <div class="mb-3 row align-items-center">
+      <label for="{{ form.complemento.id_for_label }}" class="col-sm-3 col-form-label">Complemento</label>
+      <div class="col-sm-9">
+        {{ form.complemento }}
+        {{ form.complemento.errors }}
+      </div>
+    </div>
+
+    <div class="mb-3 row align-items-center">
+      <label for="{{ form.bairro.id_for_label }}" class="col-sm-3 col-form-label">Bairro</label>
+      <div class="col-sm-9">
+        {{ form.bairro }}
+        {{ form.bairro.errors }}
+      </div>
+    </div>
+
+    <div class="mb-3 row align-items-center">
+      <label for="{{ form.cep.id_for_label }}" class="col-sm-3 col-form-label">CEP</label>
+      <div class="col-sm-9">
+        {{ form.cep }}
+        {{ form.cep.errors }}
+      </div>
+    </div>
+
+    <div class="mb-3 row align-items-center">
+      <label for="{{ form.cidade.id_for_label }}" class="col-sm-3 col-form-label">Cidade</label>
+      <div class="col-sm-9">
+        {{ form.cidade }}
+        {{ form.cidade.errors }}
+      </div>
+    </div>
+
+    <div class="mb-3 row align-items-center">
+      <label for="{{ form.uf.id_for_label }}" class="col-sm-3 col-form-label">UF</label>
+      <div class="col-sm-9">
+        {{ form.uf }}
+        {{ form.uf.errors }}
+      </div>
+    </div>
+
+    <div class="mb-3 row align-items-center">
+      <label for="{{ form.celular.id_for_label }}" class="col-sm-3 col-form-label">Celular</label>
+      <div class="col-sm-9">
+        {{ form.celular }}
+        {{ form.celular.errors }}
+      </div>
+    </div>
+
+    <div class="mb-3 row align-items-center">
+      <label for="{{ form.telefone.id_for_label }}" class="col-sm-3 col-form-label">Telefone</label>
+      <div class="col-sm-9">
+        {{ form.telefone }}
+        {{ form.telefone.errors }}
+      </div>
+    </div>
+
+    <div class="mb-3 row">
+      <div class="offset-sm-3 col-sm-9">
+        <button type="submit" class="btn btn-success">Salvar</button>
+        <a href="{% url 'painel:lista_clientes' %}" class="btn btn-secondary">Cancelar</a>
+      </div>
+    </div>
   </form>
+
+<style>
+  form {
+    max-width: 600px;  /* controla largura total do form */
+    margin-left: 0;    /* tira margem esquerda padrão */
+    margin-right: auto; /* centraliza só pela direita */
+  }
+
+  form input, form select, form textarea {
+    max-width: 400px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+</style>
+
 {% endblock %}

@@ -18,7 +18,7 @@ urlpatterns = [
   # ROTAS PERSONALIZADAS
 
     path('painel/', custom_admin_site.urls),  # ROTAS DO DJANGO ADMIN CUSTOM
-
+    
     path('', include('viagens.urls')),  # SITE
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='sitemap'),
 ]

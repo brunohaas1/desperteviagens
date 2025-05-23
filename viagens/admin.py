@@ -17,48 +17,50 @@ class DocumentoViagemInline(admin.TabularInline):
 # Inline para Viagens dentro de Cliente
 
 
-class ViagemInline(admin.TabularInline):
-    model = Viagem
-    extra = 1
-    fields = ('destino', 'data_ida', 'data_volta', 'valor', 'status', 'documentos_list')
-    readonly_fields = ('documentos_list',)
-    show_change_link = True
+#class ViagemInline(admin.TabularInline):
+ #   model = Viagem
+ #   extra = 1
+  #  fields = ('destino', 'data_ida', 'data_volta', 'valor', 'status', 'documentos_list')
+ #  readonly_fields = ('documentos_list',)
+  #  show_change_link = True
 
-    def documentos_list(self, obj):
-        if obj.id:
-            documentos = obj.documentos_viagem.all()
-            links = []
+  #  def documentos_list(self, obj):
+  #      if obj.id:
+  #          documentos = obj.documentos_viagem.all()
+  #          links = []
+#
+  #          for documento in documentos:
+  #              url = documento.arquivo.url
+  #              nome = documento.arquivo.name.split('/')[-1]
+   #             tamanho_kb = documento.arquivo.size // 1024  # Tamanho em KB
+  #              deletar_url = f"/admin/viagens/documentoviagem/{documento.id}/delete/"
+#
+  #              link_html = f"""
+  #                  📎 <a href="{url}" target="_blank">{nome}</a> ({tamanho_kb} KB)
+  #                  <a href="{deletar_url}" style="color:red; margin-left:10px;" target="_blank">[Excluir]</a>
+   #             """
+   #             links.append(link_html)
 
-            for documento in documentos:
-                url = documento.arquivo.url
-                nome = documento.arquivo.name.split('/')[-1]
-                tamanho_kb = documento.arquivo.size // 1024  # Tamanho em KB
-                deletar_url = f"/admin/viagens/documentoviagem/{documento.id}/delete/"
+   #         add_url = f"/admin/viagens/documentoviagem/add/?viagem={obj.id}"
+    #        links.append(f'<a class="button" href="{add_url}" target="_blank" style="margin-top:10px;">➕ Anexar Documento</a>')
 
-                link_html = f"""
-                    📎 <a href="{url}" target="_blank">{nome}</a> ({tamanho_kb} KB)
-                    <a href="{deletar_url}" style="color:red; margin-left:10px;" target="_blank">[Excluir]</a>
-                """
-                links.append(link_html)
-
-            add_url = f"/admin/viagens/documentoviagem/add/?viagem={obj.id}"
-            links.append(f'<a class="button" href="{add_url}" target="_blank" style="margin-top:10px;">➕ Anexar Documento</a>')
-
-            return mark_safe('<br><br>'.join(links))
-        return "-"
-    documentos_list.short_description = "Documentos"
+   #         return mark_safe('<br><br>'.join(links))
+   #     return "-"
+   # documentos_list.short_description = "Documentos"
 
 
 # Admin de Cliente (com Inline de Viagem)
 @admin.register(Cliente)
 class ClienteAdmin(admin.ModelAdmin):
-    list_display = ('nome', 'cpf', 'email', 'telefone', 'total_viagens', 'data_cadastro')
-    search_fields = ('nome', 'cpf', 'email')
-    list_filter = ('data_nascimento', 'data_cadastro')
-    inlines = [ViagemInline]  # Cadastro de Viagens dentro de Cliente
-
+    list_display = (
+        'nome', 'cpf', 'email', 'telefone', 'celular', 'endereco', 'numero',
+        'complemento', 'bairro', 'cep', 'cidade', 'uf', 'total_viagens', 'data_cadastro'
+    )
+    search_fields = ('nome', 'cpf', 'email', 'telefone', 'celular', 'endereco', 'cidade')
+    list_filter = ('data_nascimento', 'data_cadastro', 'uf')
+    
     def total_viagens(self, obj):
-        return obj.viagens.count()
+        return obj.viagem_set.count()
     total_viagens.short_description = 'Qtd. Viagens'
 
 # Admin de Solicitação de Orçamento
@@ -76,3 +78,5 @@ class RelatoriosAdmin(admin.ModelAdmin):
 
 # DocumentoViagem também registrado manualmente
 admin.site.register(DocumentoViagem)
+
+
