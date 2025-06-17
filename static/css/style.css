@@ -7,6 +7,7 @@
   --cor-vermelho: #a71212;
 }
 
+
 /* ======== BASE ======== */
 body {
   background-color: var(--cor-branco);
@@ -36,6 +37,9 @@ p {
   color: var(--cor-laranja) !important;
 }
 
+p lead {
+  text-size-adjust: 50px;
+}
 /* ======== NAVBAR ======== */
 .navbar {
   background-color: var(--cor-laranja) !important;
@@ -160,6 +164,7 @@ p {
   border-radius: 20px;
 }
 
+
 /* ======== RESPONSIVO (Mobile First) ======== */
 @media (max-width: 768px) {
   h1 {
@@ -202,3 +207,7 @@ html, body {
   max-width: 100%;
   overflow-x: hidden;
 }
+
+
+
+

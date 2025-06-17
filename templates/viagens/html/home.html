@@ -5,19 +5,45 @@
 
 {% block head_extra %}
   <link rel="stylesheet" href="{% static 'vendor/aos/aos.css' %}">
+  <style>
+    body {
+      background-image: url("{% static 'images/machu.jpg' %}"); 
+      background-repeat: no-repeat; 
+      background-position: top; 
+      background-size: 100% 50% 
+      
+      
+    }
+  </style>
 {% endblock %}
 
 {% block content %}
+<style>
+      
+  </style>
 <!-- Seção principal -->
 <div class="container py-5 d-flex justify-content-center align-items-center" style="min-height: 80vh;">
   <div class="row align-items-center w-100">
     <div class="container py-5 text-center" data-aos="fade-down">
-      <h1 class="text-primary fw-bold mb-3">REALIZE COM A DESPERTE</h1>
-      <p class="lead">A viagem dos seus sonhos começa aqui. Roteiros sob medida, atendimento personalizado e experiências inesquecíveis.</p>
+      <h1 class="text-primary fw-bold mb-3" 
+          style="text-shadow: 4px 4px 12px rgba(0, 0, 0, 0.9);-webkit-text-stroke: 0.5px rgba(242, 141, 10, 0.45);">
+        REALIZE COM A DESPERTE
+      </h1>
+     <p class="lead" style="
+  font-size: 1.7rem;
+  font-weight: 700;
+  
+  text-shadow: 2px 2px 4px #000, -1px -1px 4px #000;
+">
+  A viagem dos seus sonhos começa aqui. Roteiros sob medida, atendimento personalizado e experiências inesquecíveis.
+</p>
       <a href="{% url 'cotacao' %}" class="btn btn-success mt-3">Solicitar Orçamento</a>
     </div>
   </div>
 </div>
+
+
+
 
 <!-- Carrossel de Destinos -->
 <div class="container py-5" data-aos="fade-up">
@@ -35,17 +61,25 @@
       </div>
 
       <div class="carousel-item">
-        <img src="{% static 'images/gramado.jpg' %}" class="carousel-img d-block w-100 rounded shadow" alt="Gramado">
+        <img src="{% static 'images/cartagena.png' %}" class="carousel-img d-block w-100 rounded shadow" alt="Gramado">
         <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-2">
-          <h5>Gramado, Brasil</h5>
+          <h5>CARTAGENA DAS INDIAS</h5>
           <p>Romance e gastronomia no coração da Serra Gaúcha.</p>
         </div>
       </div>
 
       <div class="carousel-item">
-        <img src="{% static 'images/maldivas.jpg' %}" class="carousel-img d-block w-100 rounded shadow" alt="Maldivas">
+        <img src="{% static 'images/ushuai.png' %}" class="carousel-img d-block w-100 rounded shadow" alt="Maldivas">
         <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-2">
-          <h5>Maldivas</h5>
+          <h5>USHUAIA</h5>
+          <p>Relaxe em águas cristalinas com bangalôs de luxo sobre o mar.</p>
+        </div>
+      </div>
+      
+      <div class="carousel-item">
+        <img src="{% static 'images/lencois.png' %}" class="carousel-img d-block w-100 rounded shadow" alt="Maldivas">
+        <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-2">
+          <h5>LENÇOIS MARANHENSES</h5>
           <p>Relaxe em águas cristalinas com bangalôs de luxo sobre o mar.</p>
         </div>
       </div>
